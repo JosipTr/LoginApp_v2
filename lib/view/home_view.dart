@@ -16,7 +16,7 @@ class _HomeViewState extends State<HomeView> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               
             ],
           ),
