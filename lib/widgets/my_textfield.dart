@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class MyTextField extends StatelessWidget {
   final String _hintText;
   final bool _isObscured;
-  const MyTextField(this._hintText, this._isObscured, {Key? key}) : super(key: key);
+  final TextEditingController _textController;
+  const MyTextField(this._hintText, this._isObscured, this._textController, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: _textController,
       style: const TextStyle(color: Colors.blue),
       obscureText: _isObscured,
       decoration: InputDecoration(

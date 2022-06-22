@@ -9,6 +9,7 @@ class Strings {
   static const String invalidEmail = "Enter a valid e-mail";
   static const String invalidPassword = "Enter min. 6 characters";
   static const String passDontMatch = "Passwords doesn't match";
+  static const String resetPassword = "Reset password";
 }
 
     // String email = _emailTextController.text.trim();

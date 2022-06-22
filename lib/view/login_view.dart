@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_app_v2/assets/strings/strings.dart';
+import 'package:login_app_v2/main.dart';
+import 'package:login_app_v2/view/reset_pass_view.dart';
 import 'package:login_app_v2/viewmodel/firebaseauth_viewmodel.dart';
 import 'package:login_app_v2/widgets/my_elevatedbutton.dart';
 import 'package:login_app_v2/widgets/my_richtext.dart';
@@ -39,11 +41,17 @@ class _LoginViewState extends State<LoginView> {
       await _firebaseAuthViewModel.signInWithEmailAndPassword(email, password);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(_snackBar);
-      Navigator.pop(context);
+      _emailTextController.clear();
+      _passwordTextController.clear();
+      FocusManager.instance.primaryFocus?.unfocus();
     }
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
-  void _forgotPassword() {}
+  void _forgotPassword() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const ResetPasswordView()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +67,13 @@ class _LoginViewState extends State<LoginView> {
           ),
           Container(
             margin: const EdgeInsets.only(bottom: 15),
-            child: MyTextField(Strings.emailHint, !_isObscured),
+            child: MyTextField(
+                Strings.emailHint, !_isObscured, _emailTextController),
           ),
           Container(
               margin: const EdgeInsets.only(bottom: 15),
-              child: MyTextField(Strings.passHint, _isObscured)),
+              child: MyTextField(
+                  Strings.passHint, _isObscured, _passwordTextController)),
           Container(
               margin: const EdgeInsets.only(bottom: 15),
               child: MyElevatedButton(Strings.login, _login)),

@@ -1,7 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:login_app_v2/assets/strings/strings.dart';
-import 'package:login_app_v2/main.dart';
 import 'package:login_app_v2/viewmodel/firebaseauth_viewmodel.dart';
 import 'package:login_app_v2/widgets/my_elevatedbutton.dart';
 import 'package:login_app_v2/widgets/my_textformfield.dart';
@@ -23,6 +22,10 @@ class _RegisterViewState extends State<RegisterView> {
   final _snackBar = const SnackBar(
       content: Text(Strings.invalid), duration: Duration(milliseconds: 600));
 
+  TextEditingController find() {
+    return _emailTextController;
+  }
+
   @override
   void dispose() {
     _emailTextController.dispose();
@@ -35,9 +38,7 @@ class _RegisterViewState extends State<RegisterView> {
     String email = _emailTextController.text.trim();
     String password = _passwordTextController.text.trim();
 
-    showDialog(
-        context: context,
-        builder: (context) => const Center(child: CircularProgressIndicator()));
+
 
     if (_formKey.currentState!.validate()) {
       try {
@@ -50,7 +51,6 @@ class _RegisterViewState extends State<RegisterView> {
         ScaffoldMessenger.of(context).showSnackBar(_snackBar);
       }
     }
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
   String? _validateEmail() {

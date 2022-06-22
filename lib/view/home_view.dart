@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:login_app_v2/viewmodel/firebaseauth_viewmodel.dart';
+import 'package:login_app_v2/widgets/my_elevatedbutton.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -8,6 +10,12 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final _firebaseAuthViewModel = FirebaseAuthViewModel();
+
+  Future _logOut() async {
+    await _firebaseAuthViewModel.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,8 +24,9 @@ class _HomeViewState extends State<HomeView> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               
+              MyElevatedButton("logut", _logOut)
             ],
           ),
         ),
